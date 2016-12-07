@@ -76,8 +76,6 @@ class BasicCriterion extends AbstractCriterion
                 $sb .= $field . $this->comparison . $this->value;
             } else {
 
-                $params[] = ['table' => $this->realtable, 'column' => $this->column, 'value' => $this->value];
-
                 // default case, it is a normal col = value expression; value
                 // will be replaced w/ '?' and will be inserted later using PDO bindValue()
                 if ($this->ignoreStringCase) {
@@ -86,6 +84,7 @@ class BasicCriterion extends AbstractCriterion
                     $sb .= $field . $this->comparison . ':p'.count($params);
                 }
 
+                $params[] = ['table' => $this->realtable, 'column' => $this->column, 'value' => $this->value];
             }
         } else {
 
